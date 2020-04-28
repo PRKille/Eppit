@@ -10,7 +10,7 @@ function PostList(props) {
       <div>
           <Post
           whenPostClicked = {props.onPostSelection}
-          name = {post.name}
+          title = {post.title}
           time = {post.time}
           votes = {post.votes}
           id = {post.id}

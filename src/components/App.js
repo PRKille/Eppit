@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from "./Header";
+import Footer from "./Footer";
+import PostControl from './PostControl';
 import '../App.css';
 
 function App() {

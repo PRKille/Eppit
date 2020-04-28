@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return(
     <div style={styleHeader}>
-      <h1>It's Not Placeholder Text</h1>
+      <h1>Eppit</h1>
     </div>
   );
 };
