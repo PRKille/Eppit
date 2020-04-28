@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Eppit, and Epicodus Reddit Clone
 
-## Available Scripts
+#### By: Patrick Kille, Patrick Delaney, Brandan Sayarath, Geoff Goetz | April 28th 2020
 
-In the project directory, you can run:
+## Description 
 
-### `npm start`
+It's basically Reddit.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Application based around utilizing component trees, state, redux, and CRUD functionality in React. [Deployed on GitHub pages]()
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Component Diagram 
+![component structure](component-tree.jpeg) 
 
-### `npm test`
+## Project Specifications
+As a user, I want to enter content into a form and submit to create a new post.
+As a user, I want my new posts to include a timestamp. And I want to see when other listings were posted, too.
+As a user, I want to upvote posts I particularly enjoy.
+As a user, I want to downvote posts I don't like, or find inappropriate.
+As a user, I'd like posts with the most upvotes to appear higher on the page.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup/Installation Requirements
 
-### `npm run build`
+* _navigate to your desktop directory using your terminal: `cd desktop`._
+* _clone this repository: `git clone https://github.com/`._
+* _open the proejct directory in your code editor : `cd TapRoom`, `code .`_
+* _install all neccessary packages needed to run the program: `npm install`._
+* _run the program to open in your local server: `npm run start`._
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## React Specifications - - -
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Node install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### For macOS:
+_If Homebrew is not installed on your computer already, then install Homebrew by entering the following two commands in Terminal:_
+* $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+* $ echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
 
-### `npm run eject`
+_Install Git with the following command:_
+* $ brew install git
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+_Next, install Node.js by entering the following command in Terminal:_
+* $ brew install node
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### For Windows:
+_Please visit the [Node.js website](https://nodejs.org/en/download/) for installation instructions._
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Install this application
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+_Clone this repository via Terminal using the following commands:_
+* _$ cd desktop_
+* _$ git clone {url to this repo}_
+* _$ cd farmers-market_
+_Then, confirm that you have navigated to the farmers-market project directory by entering "pwd" in Terminal._
 
-## Learn More
+_Next, install npm at the project's root directory via the following commands:_
+* _$ npm install_
+* _$ npm run build_
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+_Open the contents of the directory in a text editor or IDE of your choice (e.g., to open the contents of the directory in Visual Studio Code on macOS, enter the command "code ." in Terminal)._
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Known Bugs
 
-### Code Splitting
+_No known bugs at this time._
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Technologies Used
 
-### Analyzing the Bundle Size
+* Node.js
+* Webpack
+* npm
+* Javascript
+* jQuery
+* React
+* Redux
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### License
 
-### Making a Progressive Web App
+[MIT](https://choosealicense.com/licenses/mit/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Copyright &copy; 2020 **_Geoff Goetz, Patrick Delaney, Patrick Kille, Brandan Sayarath_**
