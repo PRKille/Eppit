@@ -6,20 +6,22 @@ function PostList(props) {
   return (
     <React.Fragment>
       <hr />
-      {props.postList.map((post) => (
-      <div>
-          <Post
-          whenPostClicked = {props.onPostSelection}
-          title = {post.title}
-          time = {post.time}
-          votes = {post.votes}
-          id = {post.id}
-          key = {post.id}
-          />
-        <button onClick={() => props.onUpVote(post.id)}>YayDoot</button>
-        <button onClick={() => props.onDownVote(post.id)}>BooDoot</button>
-      </div>
-      ))}
+      {Object.values(props.postList).map((post) => {
+        return (
+          <div>
+              <Post
+              whenPostClicked = {props.onPostSelection}
+              title = {post.title}
+              time = {post.time}
+              votes = {post.votes}
+              id = {post.id}
+              key = {post.id}
+              />
+            <button onClick={() => props.onUpVote(post)}>YayDoot</button>
+            <button onClick={() => props.onDownVote(post)}>BooDoot</button>
+          </div>
+        )
+      })}
     </React.Fragment>
   );
 }

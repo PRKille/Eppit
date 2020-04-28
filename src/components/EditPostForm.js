@@ -3,14 +3,14 @@ import ReusableForm from './ReusableForm';
 import PropTypes from 'prop-types';
 
 function EditPostForm(props){
-  const { post } = props;
+  const { post, onEditPost } = props;
   const today = new Date();
   const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const dateTime = date+' '+time;
   function handlePostEditSubmission(event){
     event.preventDefault();
-    props.onEditPost({
+    onEditPost({
       title: event.target.title.value,
       content: event.target.content.value.concat("  Edited - "+{dateTime}),
       time: post.time,
@@ -21,13 +21,13 @@ function EditPostForm(props){
 
   return(
     <ReusableForm
-      formSubmissionHandler={handlePostEditSubmission}>
-    </ReusableForm>
+    formSubmissionHandler={handlePostEditSubmission}
+    buttonText="Update Post" />
   )
 }
 
 EditPostForm.propTypes = {
-  onEditPost: PropTypes.func
+  onEditPost: PropTypes.func,
 }
 
 export default EditPostForm;

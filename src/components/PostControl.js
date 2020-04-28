@@ -2,6 +2,9 @@ import React from 'react';
 import NewPostForm from './NewPostForm';
 import PostList from './PostList';
 import PostDetail from './PostDetail';
+import EditPostForm from './EditPostForm';
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 
 class PostControl extends React.Component {
@@ -10,7 +13,6 @@ class PostControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterPostList: [],
       selectedPost: null,
       editing: false
     };
@@ -31,45 +33,103 @@ class PostControl extends React.Component {
   }
 
   handleEditClick = () => {
-    console.log("handleEditClick reached!");
     this.setState({ editing: true });
   };
 
   handleEditingPostInList = (postToEdit) => {
-    const editedMasterPostList = this.state.masterPostList
-    .filter((post)=> post.id !== this.state.selectedPost.id)
-    .concat(postToEdit);
-    this.setState({masterPostList: editedMasterPostList,editing: false,selectedPost: null});
+    const { dispatch } = this.props;
+    const { id, title, content, time, votes } = postToEdit;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      title: title,
+      content: content,
+      time: time,
+      votes: votes
+    }
+    dispatch(action);
+    this.setState({
+      editing: false,
+      selectedPost: null
+    })
   }
 
+
   handleDeletingPost = (id) => {
-  const newMasterPostList = this.state.masterPostList.filter(post => post.id !== id);
-  this.setState({masterPostList: newMasterPostList, selectedPost: null});
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_POST',
+      id: id
+    }
+    dispatch(action);
+    this.setState({
+      selectedPost: null
+    });
   }
 
   handleChangingSelectedPost = (id) => {
-  const selectedPost = this.state.masterPostList.filter(post => post.id === id)[0];
-  this.setState({selectedPost: selectedPost, formVisibleOnPage:false});
-
+    const selectedPost = this.props.masterPostList[id];
+    this.setState({selectedPost: selectedPost, formVisibleOnPage:false});
   }
+
+  // const handleChangingSelectedPost = (id) => {
+  //   const selectedPost = props.masterPostList[id];
+  //   const { dispatch } = props;
+  //   const action = {
+  //     type: 'CHANGE_SELECTED',
+  //     name: selectedPost.name,
+  //     id: selectedPost.id,
+  //     description: selectedPost.description,
+  //     quantity: selectedPost.quantity
+  //   }
+  //   dispatch(action);
+  // }
 
   handleAddingNewPostToList = (newPost) => {
-  const newMasterPostList = this.state.masterPostList.concat(newPost);
-  this.setState({masterPostList: newMasterPostList, formVisibleOnPage: false});
+    const { dispatch } = this.props;
+    const { id, title, content, time, votes } = newPost;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      title: title,
+      content: content,
+      time: time,
+      votes: votes
+    }
+    dispatch(action);
+    this.setState({
+      formVisibleOnPage: false
+    })
   }
 
-  handleUpVote = (id) => {
-    const selectedPost = this.state.masterPostList.filter(post => post.id === id)[0];
-    const updatedPost = {...selectedPost, votes : selectedPost.votes+1}
-    const nonUpdatedPosts = this.state.masterPostList.filter(post => post.id !== id);
-    this.setState({masterPostList: [...nonUpdatedPosts, updatedPost]});
+  handleUpVote = (postToUpDoot) => {
+    const { dispatch } = this.props;
+    const { id, title, content, time, votes } = postToUpDoot;
+    const newDoot = votes+1;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      title: title,
+      content: content,
+      time: time,
+      votes: newDoot
+    };
+    dispatch(action);
   }
 
-  handleDownVote = (id) => {
-    const selectedPost = this.state.masterPostList.filter(post => post.id === id)[0];
-    const updatedPost = {...selectedPost, votes : selectedPost.votes-1}
-    const nonUpdatedPosts = this.state.masterPostList.filter(post => post.id !== id);
-    this.setState({masterPostList: [...nonUpdatedPosts, updatedPost]});
+  handleDownVote = (postToDownDoot) => {
+    const { dispatch } = this.props;
+    const { id, title, content, time, votes } = postToDownDoot;
+    const newDoot = votes-1;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      title: title,
+      content: content,
+      time: time,
+      votes: newDoot
+    };
+    dispatch(action);
   }
 
   render() {
@@ -79,17 +139,22 @@ class PostControl extends React.Component {
       currentlyVisibleState = <NewPostForm onNewPost={this.handleAddingNewPostToList} />;
       buttonText = "Return to Post List";
     } else if (this.state.formVisibleOnPage === false && this.state.selectedPost === null){
-      currentlyVisibleState = <PostList postList={this.state.masterPostList} 
+      currentlyVisibleState = <PostList postList={this.props.masterPostList} 
       onPostSelection={this.handleChangingSelectedPost}
       onClickingDelete={this.handleDeletingPost}
       onUpVote={this.handleUpVote}
       onDownVote={this.handleDownVote}/>;
-      buttonText = "Add Post"; 
+      buttonText = "Add Post";
+    } else if (this.state.editing === true) {
+      currentlyVisibleState = <EditPostForm 
+      onEditPost={this.handleEditingPostInList}
+      post={this.state.selectedPost} />;
+      buttonText = "Return to Post List";
     } else {
       currentlyVisibleState = <PostDetail 
         post={this.state.selectedPost}
         onClickingDelete={this.handleDeletingPost}
-        onClickingEdit={this.handleEditingPostInList}/>;
+        onClickingEdit={this.handleEditClick}/>;
         buttonText = "Return to Post List"
     }
 
@@ -102,7 +167,18 @@ class PostControl extends React.Component {
   }
 }
 
-// PostList.propTypes = {
-//   postList: PropTypes.array // array?
-// };
+PostList.propTypes = {
+  postList:  PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterPostList: state.masterPostList,
+    // editing: state.editing,
+    // selectedItem: state.selectedItem
+  }
+}
+
+PostControl = connect(mapStateToProps)(PostControl);
+
 export default PostControl;

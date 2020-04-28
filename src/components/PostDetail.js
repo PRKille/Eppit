@@ -15,7 +15,7 @@ function PostDetail(props){
         {post.votes}
       </p>
       <hr />
-      <button onClick={() => onClickingEdit(post.id)}>Update Post</button>
+      <button onClick={() => onClickingEdit(post)}>Update Post</button>
       <button onClick={() => onClickingDelete(post.id)}>Close Post</button>
     </React.Fragment>
   );
