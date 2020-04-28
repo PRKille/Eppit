@@ -6,6 +6,8 @@ function App() {
   return (
   <React.Fragment>
     <Header />
+    <PostControl />
+    <Footer />
   </React.Fragment>
   );
 }
